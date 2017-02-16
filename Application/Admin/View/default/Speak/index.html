@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<div class="row">
+
+<include file="Index/nav"/>
+
+    <!-- 后台主界面部分 Begin -->
+    <div class="col s9">
+
+        <!--##### 搜索部分 Begin #####-->
+        <div class="row" style="margin-top: 10px; margin-left: -10px">
+            <div class="col s6">
+                <nav class="white">
+                    <div class="nav-wrapper">
+                        <form action="__MODULE__/Speak/search" method="post">
+                            <div class="input-field">
+                                <input id="search" type="search" required name="search">
+                                <label for="search"><i class="mdi-action-search"></i></label>
+                                <i class="mdi-navigation-close"></i>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s3">
+                <button class="btn waves-effect waves-light btn-large  teal lighten-2" style="margin-top: 6px"
+                        type="submit"
+                        name="action">search
+                    <i class="mdi-content-send right"></i>
+                </button>
+                </form>
+            </div>
+        </div>
+        <!--##### 搜索部分 End #####-->
+
+        <!--##### 主体表格部分 Begin #####-->
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#test1">论坛帖子管理</a></li>
+                    <li class="tab col s3"><a class="" href="#test2">注销帖子管理</a></li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12">
+                <div class="card-panel">
+                    <table class="centered">
+                        <thead>
+                        <tr>
+                            <th data-field="id">id</th>
+                            <th data-field="title">帖子名称</th>
+                            <th data-field="username">发送用户</th>
+                            <th data-field="time">发送时间</th>
+                            <th data-field="status">帖子状态</th>
+                            <th data-field="is_reply">允许评论</th>
+                            <th data-field="operate">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="msg" id="vo">
+                            <tr>
+                                <td>{$vo.id}</td>
+                                <td><a href="__MODULE__/Speak/more?id={$vo.id}">{$vo.title}</a></td>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.time|date="y-m-d h:s",###}</td>
+                                <td>
+                                    <if condition="$vo.status == 0 ">普通贴
+                                        <else /> 精品贴
+                                    </if>
+                                </td>
+                                <td>
+                                    <if condition="$vo.is_reply == 1 ">允许评论
+                                        <else /> 禁止评论
+                                    </if>
+                                </td>
+                                <td>
+                                    <if condition="$vo.status == 0 ">
+                                        <a href="__URL__/set?id={$vo.id}">设置精品</a><br/>
+                                        <else />
+                                        <a href="__URL__/cancel?id={$vo.id}">取消精品</a><br/>
+                                    </if>
+                                    <if condition="$vo.is_reply == 1 ">
+                                        <a href="__URL__/close?id={$vo.id}">关闭评论</a><br/>
+                                        <else />
+                                        <a href="__URL__/open?id={$vo.id}">恢复评论</a><br/>
+                                    </if>
+                                    <a href="__URL__/delete?id={$vo.id}">注销帖子</a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo}</ul>
+            </div>
+            <div id="test2" class="col s12">
+                <div class="card-panel">
+                    <table class="centered">
+                        <thead>
+                        <tr>
+                            <th data-field="id">id</th>
+                            <th data-field="title">帖子名称</th>
+                            <th data-field="username">发送用户</th>
+                            <th data-field="time">发送时间</th>
+                            <th data-field="status">帖子状态</th>
+                            <th data-field="is_reply">允许评论</th>
+                            <th data-field="operate">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="delete" id="vo">
+                            <tr>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.title}</td>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.time|date="y-m-d h:s",###}</td>
+                                <td>
+                                    <if condition="$vo.status == 0 ">普通贴
+                                        <else /> 精品贴
+                                    </if>
+                                </td>
+                                <td>
+                                    <if condition="$vo.is_reply == 1 ">允许评论
+                                        <else /> 禁止评论
+                                    </if>
+                                </td>
+                                <td>
+                                    <a href="__URL__/recover?id={$vo.id}">恢复帖子</a><br/>
+                                    <a href="__URL__/drop?id={$vo.id}">彻底删除</a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo}</ul>
+            </div>
+        </div>
+        <!--##### 主体表格部分 Begin #####-->
+    </div>
+
+</div>
+    <!-- 后台主界面部分 End -->
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //初始化标签
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+</script>
+</body>
+</html>

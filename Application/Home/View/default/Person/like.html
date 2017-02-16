@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>我的收藏贴</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<!--导航栏-->
+<include file="Index/nav"/>
+
+<!--########################## Content Begin  ################################-->
+<br>
+<volist name="list" id="vo">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <a href="__MODULE__/Speak/more?id={$vo.id}">
+                        <div class="card-content">
+                            <p style="font-weight: bold" class="black-text">{$vo.title}
+                                <span style="font-weight: normal"
+                                      class="right grey-text text-lighten-1">{$vo.time|date="y-m-d",
+                                    ###}</span>
+                            </p>
+                            <br/>
+                            <p class="grey-text text-darken-2">{$vo.content}</p>
+                            <br>
+                            <a href="__MODULE__/Person/notLike?speak_id={$vo.id}">
+                                <p class="right grey-text text-lighten-1">不再收藏</p></a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</volist>
+
+<!--分页-->
+<br>
+<ul class="pagination center">{$pageinfo}</ul>
+
+<!--########################## Content End  ################################-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red waves-effect waves-light" href="__MODULE__/Person/index">
+        <i class="large mdi-content-reply"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+    //    模态框初始化
+    $('.modal-trigger').leanModal();
+    //    侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+</script>
+</body>
+</html>

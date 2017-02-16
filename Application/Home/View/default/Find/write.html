@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>我的昨天</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        @font-face {
+            font-family: xjl;
+            src: url(__PUBLIC__/font/xjl.ttf);
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--导航栏-->
+<include file="Index/nav" />
+
+<!--########################## Content Begin  ################################-->
+<div class="teal lighten-3" style="height: 190px;"></div>
+<div class="row" style="position: relative; top: -150px;">
+    <div class="col s12 l8 m10 offset-l2 offset-m1">
+        <div class="card-panel white" style="height: 500px;">
+            <br><br>
+            <span class="grey-text"> 发现 FIND &nbsp; > &nbsp; 我的昨天 </span>
+            <br><br>
+            <p id="content" style="font-size: 30px; font-family: xjl"></p>
+            <p id="time" class="right" style="font-family: xjl; font-size: 30px">
+                {$time}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red waves-effect waves-light" href="__MODULE__/Find/index">
+        <i class="large mdi-content-reply"></i>
+    </a>
+</div>
+<!--########################## Content End  ################################-->
+
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+    //    模态框初始化
+    $('.modal-trigger').leanModal();
+    //    侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //日记逐字显示
+    $("#time").hide();
+    var content = "{$content}";
+    var time_val = "{$time}";
+    var i = 0;
+    var j = 0;
+    time = setInterval(function() {
+        $("#content").html($("#content").html() + content[i]);
+        ++i;
+        if (content[i] == null) {
+            clearInterval(time);
+/*            time2 = setInterval(function() {
+                $('#time').html($("#time").html() + time_val[j]);
+                ++j;
+                if (time_val[j] == null) {
+                    clearInterval(time2);
+                }
+            }, 400)*/
+            $("#time").fadeIn(3000);
+
+        }
+    }, 400)
+</script>
+</body>
+</html>

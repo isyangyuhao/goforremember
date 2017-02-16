@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>游客登录</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        body {
+            background: url("__PUBLIC__/images/index/background.png")
+                        no-repeat right top;
+        }
+        #login_button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="teal">
+
+<!--用户注册模态框-->
+<include file="register"/>
+
+<div class="container">
+    <div class="center">
+        <img src="__PUBLIC__/images/index/welcome.png" alt="" class="responsive-img">
+    </div>
+    <br class="">
+    <!--##### Login Window Begin #####-->
+    <div class="row" id="login_window">
+        <div class="col l6 offset-l3 m6 offset-m3">
+            <div class="card-panel grey lighten-5">
+                <h5 class="red-text"><strong>LOGIN</strong></h5>
+                <form action="__MODULE__/Index/login" method="post">
+                    <label>
+                        用户名 :
+                        <input type="text" name="name"/>
+                    </label>
+                    <label>
+                        密码 :
+                        <input type="password" name="password"/>
+                    </label>
+                    <button class="waves-effect waves-light btn red lighten-1"
+                            style="position: relative;" id="login_button">登陆
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- 固定浮动按钮 -->
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red modal-trigger waves-effect waves-light" id="register_btn"
+           data-target="modal2">
+            <i class="large mdi-content-add "></i>
+        </a>
+    </div>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //    模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+</script>
+</body>
+</html>

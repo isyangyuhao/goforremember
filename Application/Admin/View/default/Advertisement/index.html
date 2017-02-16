@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<div class="row">
+
+<include file="Index/nav"/>
+
+    <!-- 后台主界面部分 Begin -->
+    <div class="col s9">
+
+        <!--##### 主体表格部分 Begin #####-->
+        <br/>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s4"><a class="active" href="#test1">主页广告管理</a></li>
+                    <li class="tab col s4"><a class="" href="#test2">论坛广告管理</a></li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12">
+                <div class="card-panel">
+                    <form action="__MODULE__/Advertisement/editIndex" method="post">
+                        <table>
+                            <input type="hidden" name="id" value="1"/>
+                            <tr>
+                                <td>广告内容<span class="red-text">*</span></td>
+                                <td><textarea name="content" class="materialize-textarea">
+                                    {$index_msg.content}
+                                </textarea></td>
+                            </tr>
+                            <tr>
+                                <td>广告跳转链接<span class="red-text">*</span></td>
+                                <td><input type="text" name="href" value="{$index_msg.href}"/></td>
+                            </tr>
+                            <tr>
+                                <td>广告开启开关<span class="red-text">*</span></td>
+                                <td>
+                                    <div class="switch">
+                                        <label>
+                                            Off
+                                            <input type="checkbox" id="switch">
+                                            <span class="lever"></span>
+                                            On
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="status" value="0" id="status_index"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                            <button type="submit" class="btn-floating btn-large red" id="submit_index">
+                                <i class="large mdi-action-done"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo}</ul>
+            </div>
+            <div id="test2" class="col s12">
+                <div class="card-panel">
+                    <form action="__MODULE__/Advertisement/editSpeak" method="post">
+                        <table>
+                            <input type="hidden" name="id" value="1"/>
+                            <tr>
+                                <td>广告内容<span class="red-text">*</span></td>
+                                <td><textarea name="content" class="materialize-textarea">
+                                    {$speak_msg.content}
+                                </textarea></td>
+                            </tr>
+                            <tr>
+                                <td>广告跳转链接<span class="red-text">*</span></td>
+                                <td><input type="text" name="href" value="{$speak_msg.href}"/></td>
+                            </tr>
+                            <tr>
+                                <td>广告开启开关<span class="red-text">*</span></td>
+                                <td>
+                                    <div class="switch">
+                                        <label>
+                                            Off
+                                            <input type="checkbox" id="switch2">
+                                            <span class="lever"></span>
+                                            On
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="status" value="0" id="status_speak"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                            <button type="submit" class="btn-floating btn-large red" id="submit_speak">
+                                <i class="large mdi-action-done"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo}</ul>
+            </div>
+        </div>
+        <!--##### 主体表格部分 Begin #####-->
+
+    </div>
+</div>
+    <!-- 后台主界面部分 End -->
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //初始化标签
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+</script>
+<script>
+    //根据数据库信息调取主页广告开关
+    <if condition="$index_msg.status == 1 ">
+    document.getElementById('switch').checked = true;
+    </if>
+    //提交主页广告开关
+    document.getElementById("submit_index").onclick = function() {
+        if (document.getElementById("switch").checked == true) {
+            document.getElementById("status_index").value = 1;
+        } else {
+            document.getElementById("status_index").value = 0;
+        }
+    }
+
+    //根据数据库信息调取论坛广告开关
+    <if condition="$speak_msg.status == 1 ">
+    document.getElementById('switch2').checked = true;
+    </if>
+    //提交主页论坛开关
+    document.getElementById("submit_speak").onclick = function() {
+        if (document.getElementById("switch2").checked == true) {
+            document.getElementById("status_speak").value = 1;
+        } else {
+            document.getElementById("status_speak").value = 0;
+        }
+    }
+</script>
+</body>
+</html>

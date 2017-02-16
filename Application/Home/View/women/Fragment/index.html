@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>碎片 FRAGMENT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        .card {
+            height: 200px;
+        }
+/*        .card > .logo {
+            width: 65px;
+            height: 65px;
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            background-color: #ff0000;
+            background: url("__PUBLIC__/images/user/default.jpg") no-repeat center;
+            background-size: cover;
+        }*/
+        .row img {
+            width: 65px;
+            height: 65px;
+            float: left;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .card > .name {
+            width: 105px;
+            height: 65px;
+            /*background-color: pink;*/
+            float: left;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        @media screen and (min-width: 800px) {
+            #submit {
+                position: relative; top: 60px;
+            }
+        }
+        #submit {
+            margin-left: 20px;
+        }
+        .card > .card-content {
+            margin-top: 5px;
+            float: left;
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--用户登录模态框-->
+<include file="Index/login"/>
+
+<!--用户注册模态框-->
+<include file="Index/register"/>
+
+<!--导航栏-->
+<include file="women/Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+<div class="container">
+
+    <!--### 用户发送碎片模块 Begin ###-->
+    <div class="row">
+        <div class="col m12">
+            <div class="card-panel" style="margin-top: 50px;">
+                <h6 class="">向世界说出你的那一刻</h6>
+                <h6 class="grey-text"> To tell the world the moment you</h6>
+                <div class="row">
+                    <form action="__MODULE__/Fragment/add" method="post">
+                        <div class="col s10">
+                            <label for="textarea1"></label><textarea id="textarea1" class="materialize-textarea"
+                                                                     length="30" name="content"
+                                ></textarea>
+                        </div>
+                        <button type="submit" class="waves-effect waves-light red lighten-2 btn" id="submit">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--### 用户发送碎片模块 End ###-->
+
+    <!--### 展示碎片 Begin ###-->
+    <div class="row">
+        <for start="0" end="4">
+            <div class="col m3 s12">
+                <div class="card">
+                    <div class="logo">
+                        <img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$msg[$i].icon}" alt=""/>
+                    </div>
+                    <div class="name">
+                        <h6>@ {$msg[$i].username}</h6>
+                        <small>{$msg[$i].time|date="y-m-d h:s:i",###}</small>
+                    </div>
+                    <p class="card-content">{$msg[$i].content}</p>
+                </div>
+            </div>
+        </for>
+    </div>
+    <div class="row">
+        <for start="4" end="8">
+            <div class="col m3 s12">
+                <div class="card">
+                    <div class="logo">
+                        <img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$msg[$i].icon}" alt=""/>
+                    </div>
+                    <div class="name">
+                        <h6>@ {$msg[$i].username}</h6>
+                        <small>{$msg[$i].time|date="y-m-d",###}</small>
+                    </div>
+                    <p class="card-content">{$msg[$i].content}</p>
+                </div>
+            </div>
+        </for>
+    </div>
+    <div class="row">
+        <for start="8" end="12">
+            <div class="col m3 s12">
+                <div class="card">
+                    <div class="logo">
+                        <img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$msg[$i].icon}" alt=""/>
+                    </div>
+                    <div class="name">
+                        <h6>@ {$msg[$i].username}</h6>
+                        <small>{$msg[$i].time|date="y-m-d",###}</small>
+                    </div>
+                    <p class="card-content">{$msg[$i].content}</p>
+                </div>
+            </div>
+        </for>
+    </div>
+    <div class="row">
+        <for start="12" end="16">
+            <div class="col m3 s12">
+                <div class="card">
+                    <div class="logo">
+                        <img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$msg[$i].icon}" alt=""/>
+                    </div>
+                    <div class="name">
+                        <h6>@ {$msg[$i].username}</h6>
+                        <small>{$msg[$i].time|date="y-m-d",###}</small>
+                    </div>
+                    <p class="card-content">{$msg[$i].content}</p>
+                </div>
+            </div>
+        </for>
+    </div>
+    <!--### 展示碎片 End ###-->
+</div>
+<!--##### 主内容界面 End #####-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large teal waves-effect waves-light" href="__MODULE__/Person/index">
+        <i class="large mdi-action-home"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+<!--##### 分页 Begin #####-->
+<!--<ul class="pagination center">
+    <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+</ul>-->
+<!--##### 分页 End #####-->
+
+<!--引入页脚-->
+<include file="women/Index/bottom"/>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //    模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+</script>
+</body>
+</html>

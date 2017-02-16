@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>说出 SPEAK</title>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+
+        #main .card img {
+            width: 30px;
+            height: 30px;
+            margin-top: 6px;
+            margin-left: 20px;
+        }
+        #main strong {
+            font-weight: bold;
+        }
+        #main .card h6 {
+            color: #9e9e9e  ;
+        }
+        #main .card {
+            margin: 1px;
+            height: 44px;
+            border-left: 2px solid #4db6ac;
+        }
+        a {
+            color: #000000;
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--用户登录模态框-->
+<include file="Index/login"/>
+
+<!--用户注册模态框-->
+<include file="Index/register"/>
+
+<!--导航栏-->
+<include file="Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+<div class="container" id="main">
+
+    <!--### 精品贴 Begin ###-->
+    <br>
+    <small class="grey-text">精品</small>
+    <br/><br/>
+    <volist name="perfect" id="vo">
+        <div class="card valign-wrapper row" id="close{$vo.id}">
+            <div class="col m1"><img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$vo.icon}"
+                                     class="circle responsive-img"/></div>
+            <div class="col m2"><strong>{$vo.username}</strong></div>
+            <div class="col m3"><strong><a href="__MODULE__/Speak/more?id={$vo.id}">{$vo.title}</a></strong></div>
+            <div class="col m5"><h6 class="truncate">{$vo.content}</h6></div>
+            <div class="col m1">
+                <a href="#"><i class="Large mdi-action-loyalty"></i></a>
+                <a href="__MODULE__/Speak/more?id={$vo.id}#replay"><i class="Large mdi-content-send"></i></a>
+                <a href="#" class="close" id="btn{$vo.id}"><i class="Large mdi-action-visibility-off"></i></a>
+            </div>
+        </div>
+    </volist>
+    <!--### 精品贴 End ###-->
+
+    <!--### 普通贴 Begin ###-->
+    <br>
+    <small class="grey-text">普通</small>
+    <br/><br/>
+    <volist name="normal" id="vo">
+        <div class="card valign-wrapper row" id="close{$vo.id}" >
+            <div class="col m1"><img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$vo.icon}" class="circle responsive-img"/></div>
+            <div class="col m2"><strong>{$vo.username}</strong></div>
+            <div
+                    class="col m3"><strong><a href="__MODULE__/Speak/more?id={$vo.id}">{$vo.title}</a></strong></div>
+            <div class="col m5"><h6 class="truncate">{$vo.content}</h6></div>
+            <div class="col m1">
+                <a href="__MODULE__/Speak/setLike?speak_id={$vo.id}"><i class="Large mdi-action-loyalty"></i></a>
+                <a href="__MODULE__/Speak/more?id={$vo.id}#replay"><i class="Large mdi-content-send"></i></a>
+                <a href="#" class="close" id="btn{$vo.id}"><i class="Large mdi-action-visibility-off"></i></a>
+            </div>
+        </div>
+    </volist>
+    <!--### 普通贴 Begin ###-->
+</div>
+<!--##### 主内容界面 End #####-->
+
+<!--### 广告模块 Begin ###-->
+<div class="container">
+    <if condition="$avt_status == 1">
+        <div class="row">
+            <div class="col s12 m12">
+                <a href="{$avt_msg.href}">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title black-text" style="font-weight: bold">广告</h4>
+                            <p class="black-text">{$avt_msg.content}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <else/>
+    </if>
+</div>
+
+<!--### 广告模块 End ###-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red waves-effect waves-light modal-trigger"  href="#modal3">
+        <i class="large mdi-content-add"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+<!--加载发帖模态框-->
+<include file="addSpeak" />
+
+<br>
+<ul class="pagination center">{$pageinfo}</ul>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //    模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+    //普通帖子不感兴趣函数
+    function closeBtnForNormal(btn, close) {
+        $(btn).on('click', function() {
+            $(close).slideUp(300);
+            $('#page').html($('#page').html()-1);
+        });
+    };
+
+    //精品贴不感兴趣函数
+    function closeBtnForPerfect(btn, close) {
+        $(btn).on('click', function() {
+            $(close).slideUp(300);
+        });
+    };
+
+    //隐藏帖子按钮
+    <volist name="perfect" id="vo">
+    closeBtnForPerfect("#btn{$vo.id}", "#close{$vo.id}");
+    </volist>
+    <volist name="normal" id="vo">
+    closeBtnForNormal("#btn{$vo.id}", "#close{$vo.id}");
+    </volist>
+
+
+</script>
+</body>
+</html>

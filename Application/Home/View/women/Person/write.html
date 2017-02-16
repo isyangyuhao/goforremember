@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>写下昨天</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<!--导航栏-->
+<include file="women/Index/nav"/>
+
+<!--########################## Content Begin  ################################-->
+<div class="red accent-1" style="height: 190px;"></div>
+<div class="row" style="position: relative; top: -150px;">
+    <div class="col s12 l8 m10 offset-l2 offset-m1">
+        <div class="card-panel white">
+            <!--<h6>在这里没有陌生人的留言，没有好友的评论，只有你，你的生活态度，你的昨天</h6>-->
+            <ul class="collection with-header">
+                <li class="collection-header"><h4><img src="__PUBLIC__/images/public/write.png" alt=""
+                        class="responsive-img"/>
+                </h4></li>
+                <volist name="msg" id="vo">
+                    <li class="collection-item"><div>{$vo.time|date="20y年m月d日",###}<a
+                            href="__MODULE__/Person/more?id={$vo.id}" class="secondary-content">
+                        <i class="mdi-action-visibility"></i></a></div></li>
+                </volist>
+                <li class="collection-item"><div><strong style="font-weight: bold">写下昨天...</strong><a href="#modal1"
+                           class="secondary-content modal-trigger"><i class="mdi-editor-border-color"></i></a></div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large teal waves-effect waves-light" href="__MODULE__/Index/index">
+        <i class="large mdi-content-reply"></i>
+    </a>
+</div><!--########################## Content End  ################################-->
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h5 style="font-weight: bold">写下昨天
+            <span style="font-weight: normal; font-size: 20px" class="grey-text">Write down yesterday</span></h5>
+    </div>
+    <div class="row">
+        <form action="__MODULE__/Person/add" class="col s12" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="textarea1"></label><textarea id="textarea1" class="materialize-textarea"
+                                                             name="content"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class=" modal-action modal-close waves-effect waves-green btn-flat"
+                        type="submit">提交</button>
+                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--##### write model End #####-->
+
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+    //    模态框初始化
+    $('.modal-trigger').leanModal();
+    //    侧边导航栏初始化
+    $(".button-collapse").sideNav();
+    //    Toast
+    setTimeout(function() {
+        Materialize.toast('我们对您的日记进行了加密处理，除了您不会有第二个人可以看到，请您放心去写~', 3000);
+    }, 1000);
+</script>
+</body>
+</html>

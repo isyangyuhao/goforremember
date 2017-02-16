@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>发现 FIND</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        .collapsible-body > a{
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--用户登录模态框-->
+<include file="Index/login"/>
+
+<!--用户注册模态框-->
+<include file="Index/register"/>
+
+<!--导航栏-->
+<include file="women/Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+<div class="container">
+
+    <!--### 折叠导航条 Begin ###-->
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+            <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>分类 &nbsp;&nbsp;Classify</div>
+            <div class="collapsible-body">
+                <volist name="all" id="vo">
+                    <a class="waves-effect waves-light btn grey lighten-1"
+                       href="__MODULE__/Find/{$vo.href}">{$vo
+                        .title}</a>
+                </volist>
+                <br/>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="mdi-social-whatshot"></i>热门 &nbsp;&nbsp;Hot</div>
+            <div class="collapsible-body">
+                <volist name="hot" id="vo">
+                    <a class="waves-effect waves-light btn grey lighten-1"
+                       href="__MODULE__/Find/{$vo.href}">{$vo.title}</a>
+                </volist>
+            </div>
+        </li>
+    </ul>
+    <!--### 折叠导航条 End ###-->
+
+    <br>
+
+    <!--### 详细分类 Begin ###-->
+    <div class="row">
+        <volist name="hot" id="vo">
+            <a href="__MODULE__/Find/{$vo.href}" class="black-text">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="__PUBLIC__/images/find/{$vo.icon}">
+                            <span class="card-title">{$vo.title}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </volist>
+    </div>
+    <div class="row">
+        <volist name="normal" id="vo">
+            <a href="__MODULE__/Find/{$vo.href}" class="black-text">
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="__PUBLIC__/images/find/{$vo.icon}">
+                            <span class="card-title">{$vo.title}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </volist>
+    </div>
+    <!--### 详细分类 End ###-->
+</div>
+<!--##### 主内容界面 End #####-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large teal waves-effect waves-light" href="__MODULE__/Person/index">
+        <i class="large mdi-action-home"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+
+<!--引入页脚-->
+<include file="women/Index/bottom"/>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+</script>
+</body>
+</html>

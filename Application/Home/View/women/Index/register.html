@@ -1,0 +1,84 @@
+<!--##### Register Begin #####-->
+<div id="modal2" class="modal">
+    <form action="__MOUDLE__/Index/register" method="post">
+        <div class="modal-content">
+            <table>
+                <thead>
+                <tr>
+                    <th data-field="id">用户注册</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>用户名 : </td>
+                    <td><label>
+                        <input type="text" name="username" id="username"/>
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>密码 : </td>
+                    <td><label>
+                        <input type="password" name="password" id="password"/>
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>确认密码 : </td>
+                    <td><label>
+                        <input type="password" name="repassword" id="repassword"/>
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>注册邮箱 : </td>
+                    <td><label>
+                        <input type="email" name="email" id="email"/>
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>性别 : </td>
+                    <td>
+                        <input type="radio" id="man" name="sex1" checked/>
+                        <label for="man">男神</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sex1" id="women" class=""/>
+                        <label for="women">妹子</label>
+                        <input type="hidden" name="sex" value="0" id="sex">
+                    </td>
+                </tr>
+                <tr>
+                    <td>年龄 : </td>
+                    <td>
+                        <p class="range-field">
+                            <label for="age"></label><input type="range" id="age" name="age" min="0" max="100" />
+                    </p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="submit"
+                    class=" modal-action modal-close waves-effect waves-green btn-flat teal white-text lighten-2"
+                    id="submit" formaction="__MODULE__/Index/register" method="post">注册
+            </button>
+            <button type="button" class=" modal-action modal-close waves-effect waves-green btn-flat">返回</button>
+        </div>
+    </form>
+</div>
+<!--##### Register End #####-->
+<script>
+
+    //判断用户性别
+    var isMan = true;
+    document.getElementById('man').onclick = function() {
+        isMan = true;
+    };
+    document.getElementById('women').onclick = function () {
+        isMan = false;
+    };
+    document.getElementById('submit').onclick = function() {
+        if (isMan == true) {
+            document.getElementById('sex').value = 0;
+        } else {
+            document.getElementById('sex').value = 1;
+        }
+    };
+
+</script>

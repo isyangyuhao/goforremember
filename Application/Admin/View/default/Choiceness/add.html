@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<div class="row">
+
+    <include file="Index/nav"/>
+
+    <!-- 后台主界面部分 Begin -->
+    <div class="col s9">
+        <div class="card-panel">
+            <form action="__MODULE__/Choiceness/insert" method="post">
+                <table>
+                    <tr>
+                        <td>精选文章标题<span class="red-text">*</span></td>
+                        <td><input type="text" name="title"/></td>
+                    </tr>
+                    <tr>
+                        <td>精选文章概述<span class="red-text">*</span></td>
+                        <td><input type="text" name="description"/></td>
+                    </tr>
+                    <tr>
+                        <td>精选文章内容<span class="red-text">*</span></td>
+                        <td><textarea name="content" class="materialize-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>精选文章分级<span class="red-text">*</span></td>
+                        <td>
+                            <input type="radio" id="status0" name="status1" checked/>
+                            <label for="status0">0</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="status1" name="status1" />
+                            <label for="status1">1</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="status1" id="status2" class=""/>
+                            <label for="status2">2</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="status1" id="status3" class=""/>
+                            <label for="status3">3</label>
+                            <input type="hidden" name="status" value="1" id="status" />
+                        </td>
+                    </tr>
+                </table>
+                <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <button type="submit" class="btn-floating btn-large red" id="submit">
+                        <i class="large mdi-action-done"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- 后台主界面部分 End -->
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //判断用户状态
+    var status = 0;
+    document.getElementById('status0').onclick = function() {
+        status = 0;
+    };
+    document.getElementById('status1').onclick = function() {
+        status = 1;
+    };
+    document.getElementById('status2').onclick = function () {
+        status = 2;
+    };
+    document.getElementById('status3').onclick = function () {
+        status = 3;
+    };
+    document.getElementById('submit').onclick = function() {
+        if (status == 3) {
+            document.getElementById('status').value = 3;
+        } else if (status == 2) {
+            document.getElementById('status').value = 2;
+        } else {
+            document.getElementById('status').value = 1;
+        }
+    };
+</script>
+</body>
+</html>

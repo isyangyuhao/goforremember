@@ -1,0 +1,35 @@
+<!--##### Login Begin #####-->
+<div id="modal3" class="modal">
+    <form action="__MODULE__/Speak/add" method="post">
+        <div class="modal-content">
+            <table>
+                <thead>
+                <tr>
+                    <th data-field="id">发帖</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>标题 : </td>
+                    <td><label>
+                        <input type="text" name="title"/>
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>内容 : </td>
+                    <td><label>
+                        <textarea id="textarea1" class="materialize-textarea" name="content"></textarea>
+                    </label></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="submit"
+                    class=" modal-action modal-close waves-effect waves-green btn-flat red lighten-2 white-text">发表
+            </button>
+            <button type="button" class=" modal-action modal-close waves-effect waves-green btn-flat">返回</button>
+        </div>
+    </form>
+</div>
+<!--##### Login End #####-->

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>发现 FIND</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        .collapsible-body > a{
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--用户登录模态框-->
+<include file="Index/login"/>
+
+<!--用户注册模态框-->
+<include file="Index/register"/>
+
+<!--导航栏-->
+<include file="women/Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+<br/>
+<div class="container">
+
+    <volist name="article" id="vo">
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content">
+                        <h2 class="card-title">{$vo.title}</h2>
+                        <p>{$vo.description} ...</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="__MODULE__/Find/more?id={$vo.id}">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </volist>
+
+</div>
+<!--##### 主内容界面 End #####-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large teal waves-effect waves-light" href="__MODULE__/Find/index">
+        <i class="large mdi-content-reply"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+<!--分页-->
+<br>
+<ul class="pagination center">{$pageinfo}</ul>
+
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+</script>
+</body>
+</html>

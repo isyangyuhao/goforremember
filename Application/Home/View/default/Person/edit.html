@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>账号设置</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+
+</head>
+<body class="grey lighten-5">
+
+
+<!--导航栏-->
+<include file="Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+<div class="container">
+    <div class="col s12 m12">
+        <div class="card">
+            <div class="card-content">
+                <form action="__MODULE__/Person/update" enctype="multipart/form-data" method="post">
+                    <table>
+                        <input type="hidden" value="{$msg.id}" name="id"/>
+                        <tr>
+                            <td>用户名<span class="red-text">*</span></td>
+                            <td><label>
+                                <!--<input type="text" name="username" value="{$msg.username}"/>-->
+                                <h6>{$msg.username}</h6>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>密码<span class="red-text">*</span></td>
+                            <td><label>
+                                <input type="password" name="password" value=""/>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>邮箱<span class="red-text">*</span></td>
+                            <td><label>
+                                <input type="email" name="email" value="{$msg.email}"/>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>性别<span class="red-text">*</span></td>
+                            <td>
+                                <input type="radio" id="man" name="sex1" checked/>
+                                <label for="man">男神</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="sex1" id="women" class=""/>
+                                <label for="women">妹子</label>
+                                <input type="hidden" name="sex" value="0" id="sex">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年龄<span class="red-text">*</span></td>
+                            <td>
+                                <p class="range-field">
+                                    <label for="age"></label><input type="range" id="age" name="age" min="0" max="100"
+                                                                    value="{$msg.age}"/>
+                                </p></td>
+                        </tr>
+                        <tr>
+                            <td>个性签名</td>
+                            <td><label>
+                                <input type="text" name="description" value="{$msg.description}"/>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>告诉世界</td>
+                            <td><label>
+                                <input type="text" name="tell" value="{$msg.tell}"/>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>联系电话</td>
+                            <td><label>
+                                <input type="text" name="phone" value="{$msg.phone}"/>
+                            </label></td>
+                        </tr>
+                        <tr>
+                            <td>地址</td>
+                            <td><label>
+                                <input type="text" name="address" value="{$msg.address}"/>
+                            </label></td>
+                        </tr>
+<!--                        <tr>
+                            <td>上传头像</td>
+                            <td>
+                                <div class="file-field input-field">
+                                    <input class="file-path validate" type="text"/>
+                                    <div class="btn" style="width: 0; height: 0;">
+                                        <span>File</span>
+                                        <input type="file" name="icon"/>
+                                    </div>
+                                </div></td>
+                        </tr>-->
+                        <tr>
+                            <td>注销账号</td>
+                            <td><label>
+                                <a  class="waves-effect waves-light btn modal-trigger red" href="#modal1" >确认注销</a>
+                                &nbsp;&nbsp;<span class="red-text text-lighten-2">注销账号后您将不能再使用该账号访问本网站，请谨慎选择!</span>
+                            </label></td>
+                        </tr>
+                    </table>
+                    <!-- ##### 固定圆形浮动按钮 Begin #####-->
+                    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                        <button type="submit" class="btn-floating btn-large red waves-effect waves-light"
+                                id="submit">
+                            <i class="large mdi-action-done-all"></i>
+                        </button>
+                    </div>
+                    <!-- ##### 固定圆形浮动按钮 End #####-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--##### 提示注销账号模态框 Begin #####-->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>警告 warning!</h4><br/><br/>
+        <p>注销账号后您将不能再使用该账号访问本网站，您真的要注销账号吗?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">
+            返回</a>
+        <a href="__MODULE__/Person/delete" class=" modal-action modal-close waves-effect waves-green btn-flat red-text">
+            确定注销</a>
+    </div>
+</div>
+<!--##### 提示注销账号模态框 Begin #####-->
+
+<!--##### 主内容界面 End #####-->
+
+
+<!--引入页脚-->
+<include file="Index/bottom"/>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script>
+    //将0/1转化为性别radio
+    <if condition = "$msg.sex eq 1">
+        document.getElementById('women').checked = true;
+    </if>
+</script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+</script>
+
+<script>
+
+    //判断用户性别
+    var isMan = true;
+    document.getElementById('man').onclick = function() {
+        isMan = true;
+    };
+    document.getElementById('women').onclick = function () {
+        isMan = false;
+    };
+    document.getElementById('submit').onclick = function() {
+        if (isMan == true) {
+            document.getElementById('sex').value = 0;
+        } else {
+            document.getElementById('sex').value = 1;
+        }
+    };
+
+</script>
+
+</body>
+</html>

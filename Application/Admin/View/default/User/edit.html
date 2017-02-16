@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>edit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<div class="row">
+
+    <include file="Index/nav"/>
+
+    <!-- 后台主界面部分 Begin -->
+    <div class="col s9">
+        <div class="card-panel">
+            <form action="__MODULE__/User/update" method="post">
+                <input type="hidden" name="id" value="{$msg.id}"/>
+                <table>
+                    <tr>
+                        <td>用户名<span class="red-text">*</span></td>
+                        <td><input type="text" name="username" value="{$msg.username}"/></td>
+                    </tr>
+                    <tr>
+                        <td>邮箱<span class="red-text">*</span></td>
+                        <td><input type="text" name="email" value="{$msg.email}"/></td>
+                    </tr>
+                    <tr>
+                        <td>性别<span class="red-text">*</span></td>
+                        <td>
+                            <input type="radio" id="man" name="sex1" checked/>
+                            <label for="man">男神</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="sex1" id="women" class=""/>
+                            <label for="women">妹子</label>
+                            <input type="hidden" name="sex" value="0" id="sex">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>年龄<span class="red-text">*</span></td>
+                        <td>
+                            <p class="range-field">
+                                <label for="age"></label><input type="range" id="age" name="age" min="0" max="100"
+                                                                value="{$msg.age}"/>
+                            </p></td>
+                    </tr>
+                    <tr>
+                        <td>用户状态<span class="red-text">*</span></td>
+                        <td>
+                            <input type="radio" id="status0" name="status1" checked/>
+                            <label for="status0">0</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="status1" name="status1" checked/>
+                            <label for="status1">1</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="status1" id="status2" class=""/>
+                            <label for="status2">2</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="status1" id="status3" class=""/>
+                            <label for="status3">3</label>
+                            <input type="hidden" name="status" value="1" id="status" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>个人说明</td>
+                        <td><input type="text" name="description" value="{$msg.description}"/></td>
+                    </tr>
+                    <tr>
+                        <td>告诉世界</td>
+                        <td><input type="text" name="tell" value="{$msg.tell}"/></td>
+                    </tr>
+                    <tr>
+                        <td>联系电话</td>
+                        <td><input type="text" name="phone" value="{$msg.phone}"/></td>
+                    </tr>
+                    <tr>
+                        <td>住址</td>
+                        <td><input type="text" name="address" value="{$msg.address}"/></td>
+                    </tr>
+                </table>
+                <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <button type="submit" class="btn-floating btn-large red" id="submit">
+                        <i class="large mdi-action-done"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- 后台主界面部分 End -->
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //将0/1转化为性别radio
+    <if condition = "$msg.sex eq 1">
+    document.getElementById('women').checked = true;
+    </if>
+    <if condition = "$msg.status eq 0">
+            document.getElementById('status0').checked = true;
+    <elseif condition = "$msg.status eq 2" />
+    document.getElementById('status2').checked = true;
+    <elseif condition = "$msg.status eq 3" />
+    document.getElementById('status3').checked = true;
+    <else />
+    document.getElementById('status1').checked = true;
+    </if>
+</script>
+<script>
+    //判断用户性别
+    var isMan = true;
+    document.getElementById('man').onclick = function() {
+        isMan = true;
+    };
+    document.getElementById('women').onclick = function () {
+        isMan = false;
+    };
+    //判断用户状态
+    var status = 1;
+    document.getElementById('status1').onclick = function() {
+        status = 1;
+    };
+    document.getElementById('status2').onclick = function () {
+        status = 2;
+    };
+    document.getElementById('status3').onclick = function () {
+        status = 3;
+    };
+    document.getElementById('submit').onclick = function() {
+        if (isMan == true) {
+            document.getElementById('sex').value = 0;
+        } else {
+            document.getElementById('sex').value = 1;
+        }
+        if (status == 3) {
+            document.getElementById('status').value = 3;
+        } else if (status == 2) {
+            document.getElementById('status').value = 2;
+        } else {
+            document.getElementById('status').value = 1;
+        }
+    };
+</script>
+</body>
+</html>

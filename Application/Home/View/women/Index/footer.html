@@ -1,0 +1,81 @@
+<!--##### 页脚面板模块 Begin #####-->
+<footer class="page-footer red lighten-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Follow us</h5>
+                <p class="grey-text text-lighten-4">您可以关注我们的官方微信 : 那年 (微信号:goforemember)</p>
+                <p class="grey-text text-lighten-4">您也可以通过登陆后点击下方按钮进入留言板给我们留言</p>
+                <a class="waves-effect waves-light btn red lighten-3 modal-trigger" data-target="modal3"><i
+                        class="mdi-content-send"></i>
+                    Message</a>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <volist name="links" id="vo">
+                        <li><a class="grey-text text-lighten-3" href="{$vo.src}">{$vo.name} : {$vo.src}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2016 by yang
+            <a class="grey-text text-lighten-4 right" href="{$adminUrl}">
+                <i class="Tiny mdi-editor-insert-chart" style="position: relative; top: 1px;"></i>
+                Administrator entrance</a>
+        </div>
+    </div>
+</footer>
+<!--##### 页脚面板模块 End #####-->
+
+<!--##### 留言板模态框 Begin #####-->
+<form action="__MODULE__/Index/contact" method="post">
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <table>
+                <thead>
+                <tr>
+                    <th data-field="id">留言板</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <form class="col s12" action="__MODULE__/Index/contact" method="post">
+                                <div class="row">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <textarea id="textarea1" class="materialize-textarea" length="120"
+                                                          name="content"
+                                                        ></textarea>
+                                                <label for="textarea1">请写下想对我们说的话</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="{$info.id}" name="user_id"/>
+                                    </form>
+                                </div>
+                                    </form>
+                                </div>
+                                <div class="switch right">
+                                    <input type="hidden" value="<{$user_info.user_name}>" name="username">
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class=" modal-action waves-effect waves-green btn-flat teal lighten-2 white-text">send
+            </button>
+            <button type="button" class=" modal-action modal-close waves-effect waves-green btn-flat">Return</button>
+        </div>
+    </div>
+</form>
+<!--##### 留言板模态框 End #####-->

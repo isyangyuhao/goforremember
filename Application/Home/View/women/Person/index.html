@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>个人中心</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        #user_img {
+            height: 130px;
+            width: 130px;
+            margin: 0 auto;
+            background-size: cover;
+            border-radius: 100%;
+            text-align: center;
+            position: relative;
+            top: 25px;
+        }
+
+        #user_name {
+            line-height: 3em;
+        }
+        .title_icon {
+            display: block;
+            float: left;
+        }
+        .card a {
+            color: #000000;
+        }
+
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--导航栏-->
+<include file="women/Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+
+<div style="height: 250px;" class="red accent-1 z-depth-1">
+    <!--用户头像-->
+    <a class="modal-trigger" href="#modal1">
+        <div class="grey" id="user_img">
+            <img src="http://goforremember-public.stor.sinaapp.com/upload%2F{$msg.icon}" class="circle" alt=""
+                 width="130" height="130"/>
+        </div>
+    </a>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <form action="__MODULE__/Person/upload" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{$msg.id}">
+            <div class="modal-content">
+                <h6 style="font-weight: bold">上传头像</h6>
+                <p>请选择最能代表您的图片作为您的头像</p>
+                <div class="file-field input-field">
+                    <input class="file-path validate" type="text"/>
+                    <div class="btn" style="width: 0; height: 0;">
+                        <span>File</span>
+                        <input type="file" name="icon"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+                <button type="submit"
+                        class=" modal-action modal-close waves-effect waves-green btn-flat teal white-text lighten-2"
+                        id="submit" formaction="__MODULE__/Person/upload" method="post">上传
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <h5 class="center" id="user_name">{$msg.username}</h5>
+    <h6 class="center grey-text text-darken-2">{$msg.description}</h6>
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8">
+            <h5 class="card-title teal-text" style="margin-top: 12px">
+                <i class="small mdi-action-accessibility grey-text text-lighten-2 title_icon"></i>
+                <span class="red-text">&nbsp;Tell World</span></h5>
+            <br/>
+         <span class="" style="font-size: 20px">
+             {$msg.tell}
+         </span>
+        </div>
+        <div class="col s12 m4">
+            <h5 class="card-title teal-text">
+                <i class="small mdi-action-face-unlock grey-text text-lighten-2 title_icon"></i>
+                <span>&nbsp;&nbsp;About Me</span></h5>
+            <div class="card-panel grey lighten-4">
+                <p>性别 : {$sex}</p>
+                <p>年龄 : {$msg.age}</p>
+                <p>联系电话 : {$msg.phone}</p>
+                <p>家庭住址 : {$msg.address}</p>
+            </div>
+        </div>
+    </div>
+
+    <!--### 我的收藏 Begin ###-->
+    <a class="grey-text" href="__MODULE__/Person/like" title="点击查看我的全部收藏内容">我的收藏</a>
+    <div class="row">
+        <volist name="myLike" id="vo">
+            <div class="col s12 m4">
+                <a href="__MODULE__/Speak/more?id={$vo.id}">
+                    <div class="card-panel red lighten-3" style="height: 160px;">
+                        <span class="white-text" style="font-weight: bold">{$vo.title}</span>
+                        <br>
+                        <p class="white-text truncate">{$vo.content}
+                        </p>
+                        <p class="right grey-text text-lighten-2">{$vo.time|date="y-m-d",###}</p>
+                    </div>
+                </a>
+            </div>
+        </volist>
+    </div>
+    <!--### 我的收藏 End ###-->
+
+    <!--### 我的帖子 Begin ###-->
+    <a class="grey-text" href="__MODULE__/Person/mySpeak" title="点击查看我的全部帖子">我的帖子</a>
+    <div class="row">
+        <volist name="mySpeak" id="vo">
+            <div class="col s12 m12">
+                <div class="card">
+                    <a href="__MODULE__/Speak/more?id={$vo.id}">
+                        <div class="card-content">
+                            <p>{$vo.content}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <!--### 我的帖子 End ###-->
+</div>
+
+<!--##### 主内容界面 End #####-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red waves-effect waves-light" href="__MODULE__/Index/index">
+        <i class="large mdi-content-reply"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+
+<!--引入页脚-->
+<include file="women/Index/bottom"/>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+</script>
+</body>
+</html>

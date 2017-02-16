@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>那年极简版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<!-- ##### 顶部导航条 Begin #####-->
+<!-- Dropdown Structure -->
+<nav class="light-green lighten-2">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center"><img src="__PUBLIC__/images/public/logo_simple.png" alt=""/></a>
+    </div>
+</nav>
+<!-- ##### 顶部导航条 End #####-->
+
+<!--##### 主内容 Begin #####-->
+<br>
+<volist name="list" id="vo">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card-panel">
+                    <h4 class="center" style="font-weight: bold">{$vo.title}</h4>
+                    <h5>{$vo.content}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</volist>
+<!--##### 主内容 End #####-->
+
+<!--分页-->
+<br>
+<ul class="pagination center">{$pageinfo}</ul>
+
+<!--##### 按钮部分 Begin #####-->
+<div class="fixed-action-btn " style="bottom: 45px; right: 24px;">
+    <a href="__MODULE__/Index/exitLogin" class="waves-effect waves-light btn-large deep-purple lighten-2" style="font-size:
+    18px;
+    font-weight: bold">
+        退出登录
+    </a>
+</div>
+<div class="fixed-action-btn " style="bottom: 112px; right: 24px;">
+    <a href="__MODULE__/Index/index" class="waves-effect waves-light btn-large deep-purple lighten-4"
+       style="font-size: 14px; font-weight: bold">
+        返回普通版
+    </a>
+</div>
+<!--##### 按钮部分 End #####-->
+
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //    模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+
+
+</script>
+</body>
+</html>

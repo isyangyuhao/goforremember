@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+</head>
+<body class="grey lighten-5">
+
+<div class="row">
+
+<include file="Index/nav"/>
+
+    <!-- 后台主界面部分 Begin -->
+    <div class="col s9">
+
+        <!--##### 搜索部分 Begin #####-->
+        <div class="row" style="margin-top: 10px; margin-left: -10px">
+            <div class="col s6">
+                <nav class="white">
+                    <div class="nav-wrapper">
+                        <form action="__MODULE__/Shop/search" method="post">
+                            <div class="input-field">
+                                <input id="search" type="search" required name="search">
+                                <label for="search"><i class="mdi-action-search"></i></label>
+                                <i class="mdi-navigation-close"></i>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s3">
+                <button class="btn waves-effect waves-light btn-large  teal lighten-2" style="margin-top: 6px"
+                        type="submit"
+                        name="action">search
+                    <i class="mdi-content-send right"></i>
+                </button>
+                </form>
+            </div>
+        </div>
+        <!--##### 搜索部分 End #####-->
+
+        <!--##### 主体表格部分 Begin #####-->
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#test1">轮播广告管理</a></li>
+                    <li class="tab col s3"><a class="" href="#test2">推荐商家管理</a></li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12">
+                <div class="card-panel">
+                    <table class="centered">
+                        <thead>
+                        <tr>
+                            <th data-field="id">id</th>
+                            <th data-field="img">轮播图片加载地址</th>
+                            <th data-field="href">轮播图片链接</th>
+                            <th data-field="description">轮播图片信息</th>
+                            <th data-field="operate">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="msg" id="vo">
+                            <tr>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.img}</td>
+                                <td>{$vo.href}</td>
+                                <td>{$vo.description}</td>
+                                <td>
+                                    <a href="__URL__/edit?id={$vo.id}">编辑</a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo2}</ul>
+            </div>
+            <div id="test2" class="col s12">
+                <div class="card-panel">
+                    <table class="centered">
+                        <thead>
+                        <tr>
+                            <th data-field="id">id</th>
+                            <th data-field="name">商品名称</th>
+                            <th data-field="description">商品描述</th>
+                            <!--<th data-field="src">商家链接地址</th>-->
+                            <th data-field="operate">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="good" id="vo">
+                            <tr>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.description}</td>
+                                <!--<td>{$vo.href}</td>-->
+                                <td>
+                                    <a href="__URL__/editGood?id={$vo.id}">编辑</a></td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <br>
+                <ul class="pagination center">{$pageinfo2}</ul>
+            </div>
+        </div>
+        <!--##### 主体表格部分 Begin #####-->
+    </div>
+</div>
+    <!-- 后台主界面部分 End -->
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+<script>
+    //初始化标签
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+</script>
+</body>
+</html>

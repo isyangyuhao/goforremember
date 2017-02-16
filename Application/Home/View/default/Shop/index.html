@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>商城 SHOP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <css href="__PUBLIC__/css/materialize.min.css" />
+    <style>
+        .collapsible-body > a{
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body class="grey lighten-5">
+
+<!--用户登录模态框-->
+<include file="Index/login"/>
+
+<!--用户注册模态框-->
+<include file="Index/register"/>
+
+<!--导航栏-->
+<include file="Index/nav" />
+
+<!--##### 主内容界面 Begin #####-->
+
+
+
+<div class="container" style="margin-top: 6px">
+
+    <div class="slider hide-on-med-and-down">
+        <ul class="slides">
+            <volist name="photo" id="vo">
+                <li>
+                    <a href="{$vo.href}"><img src="__PUBLIC__/images/shop/{$vo.img}"
+                                                    class="responsive-img"></a>
+                    <div class="caption center-align">
+                        <h3>{$vo.description}</h3>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+
+    <div class="row">
+        <volist name="goods" id="vo">
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="__PUBLIC__/images/shop/{$vo.img}">
+                        <span class="card-title">{$vo.name}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>{$vo.description}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{$vo.href}">进入店铺了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </volist>
+        </div>
+    </div>
+
+</div>
+<!--##### 主内容界面 End #####-->
+
+<!-- ##### 固定圆形浮动按钮 Begin #####-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red waves-effect waves-light" href="__MODULE__/Person/index">
+        <i class="large mdi-action-home"></i>
+    </a>
+</div>
+<!-- ##### 固定圆形浮动按钮 End #####-->
+
+
+<!--引入页脚-->
+<include file="Index/bottom"/>
+
+<script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+<script src="__PUBLIC__/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    //移动端侧边导航栏初始化
+    $(".button-collapse").sideNav();
+
+    //主导航栏下拉列表初始化
+    $(".dropdown-button").dropdown();
+
+    //模态框初始化
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
+
+    //轮播相册初始化
+    $(document).ready(function(){
+        $('.slider').slider({full_width: true});
+    });
+
+
+</script>
+</body>
+</html>
